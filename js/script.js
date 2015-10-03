@@ -1,10 +1,16 @@
 
 var data_bus_stops = [];
+/*var neighborhoods = [
+  {lat: 12.961, lng: 77.587},
+  {lat: 12.951, lng: 77.577},
+  {lat: 12.941, lng: 77.567}
+ 
+];*/
+
+var neighborhoods = [];
 
 console.log("ready!");
 getBusStops("https://166.78.185.237:9990/urbanhack/0.1/stops");
-
-
 
 //function to read all the data from API
 function  getBusStops(api_url) {
@@ -25,7 +31,7 @@ function  getBusStops(api_url) {
         {
             var a = JSON.parse(xmlhttp.responseText);
             var data_array = a["result"];
-            //console.log("" + xmlhttp.responseText);
+            //console.log(data_array);
 
             var len = data_array.length;
             //console.log("length : " + len);
@@ -37,9 +43,15 @@ function  getBusStops(api_url) {
                     lat: data_array[i].lat,
                     long: data_array[i].long
                 });
+			    //console.log(data_array[i].lat);
+				//drop();
+				neighborhoods.push({lat: Number(data_array[i].lat), lng: Number(data_array[i].long)});
+				//neighborhoods.push({lat: 12.961, lng: 77.587});
 
-                console.log("new Bus" + data_array[i].stop_name);
+                
             }
+			drop();
+//			/console.log(data_bus_stops[1000]);
         }
     }
 
