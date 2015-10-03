@@ -1,9 +1,12 @@
 
 var data_bus_stops = [];
+var startPosition;
+var endPosition;
 
 console.log("ready!");
 getBusStops("https://166.78.185.237:9990/urbanhack/0.1/stops");
 
+// initialize
 
 
 //function to read all the data from API
@@ -40,6 +43,7 @@ function  getBusStops(api_url) {
 
                 console.log("new Bus" + data_array[i].stop_name);
             }
+            populateSearch();
         }
     }
 
@@ -47,4 +51,11 @@ function  getBusStops(api_url) {
     xmlhttp.setRequestHeader("Authorization", "Basic dXJiYW5oYWNrMjAxNUBnbWFpbC5jb206eHJjaU5ibXRjMTEy");
     xmlhttp.send();
 
+}
+
+function populateSearch() {
+    for (var i = 0; i < data_bus_stops.length; i++) {
+        $("#stoplist").append("<option>" + data_bus_stops[i].stop_name + "</option>");
+    }
+    awesomplete.evaluate();
 }
